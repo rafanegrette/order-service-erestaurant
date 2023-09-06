@@ -1,3 +1,6 @@
 rootProject.name = 'order-service-erestaurant'
-include 'application'
+include ':application'
+include ':adapters:out:nosql-persistence'
+include ':adapters:in:gRPC-endpoints'
+include ':configuration'
 

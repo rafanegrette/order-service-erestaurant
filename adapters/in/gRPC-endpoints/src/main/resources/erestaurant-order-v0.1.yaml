@@ -1,0 +1,36 @@
+openapi: "3.0.0"
+info:
+  version: 0.0.1
+  title: ERestaurant Order Service
+  license:
+    name: MIT
+servers:
+  - url: http://localhost/v1
+paths:
+  /orders:
+    post:
+      summary: Place an order
+      operationId: generateOrder
+      tags:
+        - orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Greeting'
+      responses:
+        '201':
+          description: Order Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Greeting'
+components:
+  schemas:
+    Greeting:
+      type: object
+      properties:
+        message:
+          type: string
+          example: hello

@@ -1,4 +1,5 @@
 package com.perficient.hub.domain;
 
-public class Order {
+public record Order (String message) {
+
 }

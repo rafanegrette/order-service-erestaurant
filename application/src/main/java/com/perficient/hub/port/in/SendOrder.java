@@ -1,4 +1,8 @@
 package com.perficient.hub.port.in;
 
-public class SendOrder {
+import com.perficient.hub.domain.Order;
+
+public interface SendOrder {
+
+    String placeOrder(Order order);
 }

@@ -1,0 +1,32 @@
+plugins {
+    id 'io.github.lognet.grpc-spring-boot' version '5.1.4'
+    id "org.openapi.generator" version "6.6.0"
+    id "com.google.protobuf" version "0.9.4"
+}
+
+dependencies {
+    implementation project(':application')
+    implementation 'io.grpc:grpc-testing:1.57.2'
+}
+
+task buildProtoOpenAPI (type: org.openapitools.generator.gradle.plugin.tasks.GenerateTask) {
+    generatorName.set("protobuf-schema")
+    inputSpec.set("$projectDir/src/main/resources/erestaurant-order-v0.1.yaml")
+    outputDir.set("$projectDir/src/main/proto")
+    apiPackage.set("com.perficient.hub.adapter.endpoints.api")
+    invokerPackage.set("com.perficient.hub.adapter.endpoints.invoker")
+    modelPackage.set("com.perficient.hub.adapter.endpoints.model")
+    configOptions.set([
+            dateLibrary: "java8"
+    ])
+}
+
+task customClean(type: Delete) {
+    delete "$projectDir/src/main/proto"
+}
+
+clean.dependsOn customClean
+
+generateProto.dependsOn buildProtoOpenAPI
+
+processResources.dependsOn buildProtoOpenAPI
